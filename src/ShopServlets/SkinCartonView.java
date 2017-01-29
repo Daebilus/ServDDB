@@ -1,9 +1,12 @@
+package ShopServlets;
+
+import ShopServlets.ItemView;
+
 /**
  * Created by vinspi on 27/01/17.
  */
-public class BoostView extends ItemView{
-
-    public BoostView(int monnaieIRL, int monnaieIG, int id_element, String image, String description) {
+public class SkinCartonView extends ItemView {
+    public SkinCartonView(int monnaieIRL, int monnaieIG, int id_element, String image, String description) {
         this.monnaieIRL = monnaieIRL;
         this.monnaieIG = monnaieIG;
         this.id_element = id_element;

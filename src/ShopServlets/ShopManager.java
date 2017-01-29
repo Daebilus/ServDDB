@@ -1,5 +1,8 @@
-import com.sun.org.apache.regexp.internal.RE;
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
+package ShopServlets;
+
+import AccountServlets.AccountManager;
+import ShopServlets.ItemView;
+import ShopServlets.PackView;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -65,14 +68,14 @@ public class ShopManager {
 
         //IMAGEPACK/DESCRIPTION PACK A RAJOUTER DANS LA DB !!!
 
-        String query = "SELECT monnaieIG, monnaieIRL, id_Pack, descriptionPack, imagePack, FROM Offre " +
+        String query = "SELECT prixMonnaieIG, prixMonnaieIRL, id_Pack, descriptionPack, imageMiniaturePack FROM Offre" +
                 "JOIN Pack USING(id_pack);";
 
-        ResultSet resultSet = Manager.getManager().sendRequestQuery(query,connection);
+        ResultSet resultSet = AccountServlets.Manager.getManager().sendRequestQuery(query,connection);
         try {
             while (resultSet.next()){
 
-                listItem.add((new PackView(resultSet.getInt("monnaieIRL"),resultSet.getInt("monnaieIG"),resultSet.getInt("id_Pack"),resultSet.getString("imagePack"),resultSet.getString("descriptionPack"))));
+                listItem.add((new PackView(resultSet.getInt("prixMonnaieIRL"),resultSet.getInt("prixMonnaieIG"),resultSet.getInt("id_Pack"),resultSet.getString("imageMiniaturePack"),resultSet.getString("descriptionPack"))));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -84,15 +87,15 @@ public class ShopManager {
 
         listItem = new LinkedList<>();
 
-        String query = "SELECT monnaieIG, monnaireIRL, id_Boost, imageBoost, descriptionBoost FROM Offre " +
+        String query = "SELECT prixMonnaieIRL, prixMonnaieIRL, id_Boost, imageMiniatureBoost, descriptionBoost FROM Offre " +
                 "JOIN OffreBoost USING (id_Offre)" +
                 "JOIN Boost USING(id_Boost);";
 
-        ResultSet resultSet = Manager.getManager().sendRequestQuery(query,connection);
+        ResultSet resultSet = AccountServlets.Manager.getManager().sendRequestQuery(query,connection);
         try {
             while (resultSet.next()){
 
-                listItem.add((new BoostView(resultSet.getInt("monnaieIRL"),resultSet.getInt("monnaieIG"),resultSet.getInt("id_Boost"),resultSet.getString("imageBoost"),resultSet.getString("descriptionBoost"))));
+                listItem.add((new BoostView(resultSet.getInt("prixMonnaieIRL"),resultSet.getInt("prixMonnaieIG"),resultSet.getInt("id_Boost"),resultSet.getString("imageMiniatureBoost"),resultSet.getString("descriptionBoost"))));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -104,13 +107,12 @@ public class ShopManager {
 
         listItem = new LinkedList<>();
 
-        String query =  "SELECT monnaieIG, monnaieIRL, id_SkinCartonCarte, imageCarton, descriptionCarton FROM Offre" +
-                        "JOIN OffreCartonCarte USING (id_Offre)" +
+        String query =  "SELECT prixMonnaieIRL, prixMonnaieIG, id_SkinCartonCarte, imageMiniatureCarton, descriptionCarton FROM Offre JOIN OffreCartonCarte USING (id_Offre)" +
                         "JOIN SkinCartonCarte USING (id_SkinCartonCarte);";
-        ResultSet resultSet = Manager.getManager().sendRequestQuery(query,connection);
+        ResultSet resultSet = AccountServlets.Manager.getManager().sendRequestQuery(query,connection);
         try {
             while (resultSet.next()){
-                listItem.add((new SkinCartonView(resultSet.getInt("monnaieIRL"),resultSet.getInt("monnaieIG"),resultSet.getInt("id_SkinCartonCarte"),resultSet.getString("imageCarton"),resultSet.getString("descriptionCarton"))));
+                listItem.add((new SkinCartonView(resultSet.getInt("prixMonnaieIRL"),resultSet.getInt("prixMonnaieIG"),resultSet.getInt("id_SkinCartonCarte"),resultSet.getString("imageMiniatureCarton"),resultSet.getString("descriptionCarton"))));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -121,13 +123,11 @@ public class ShopManager {
 
         listItem = new LinkedList<>();
 
-        String query =  "SELECT monnaieIG, monnaieIRL, id_SkinMap, imageMap, descriptionMap FROM Offre" +
-                "JOIN OffreMap USING (id_Offre)" +
-                "JOIN Map USING (id_SkinMap);";
-        ResultSet resultSet = Manager.getManager().sendRequestQuery(query,connection);
+        String query =  "SELECT prixMonnaieIG, prixMonnaieIRL, id_SkinMap, imageMiniatureMap, descriptionMap FROM Offre JOIN OffreMap USING (id_Offre) JOIN Map USING (id_SkinMap);";
+        ResultSet resultSet = AccountServlets.Manager.getManager().sendRequestQuery(query,connection);
         try {
             while (resultSet.next()){
-                listItem.add((new SkinMapView(resultSet.getInt("monnaieIRL"),resultSet.getInt("monnaieIG"),resultSet.getInt("id_SkinMap"),resultSet.getString("imageMap"),resultSet.getString("descriptionMap"))));
+                listItem.add((new SkinMapView(resultSet.getInt("prixMonnaieIRL"),resultSet.getInt("prixMonnaieIG"),resultSet.getInt("id_SkinMap"),resultSet.getString("imageMiniatureMap"),resultSet.getString("descriptionMap"))));
             }
         }catch (SQLException e){
             e.printStackTrace();

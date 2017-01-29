@@ -1,3 +1,7 @@
+package ShopServlets;
+
+import ShopServlets.ItemView;
+
 /**
  * Created by vinspi on 27/01/17.
  */

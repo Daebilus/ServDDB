@@ -1,3 +1,7 @@
+package ShopServlets;
+
+import ShopServlets.ShopManager;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -5,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by vinspi on 27/01/17.
@@ -35,7 +37,13 @@ public class ShopViewServletAndroid extends HttpServlet {
         resp.setContentType("application/json");
 
         shopManager.getAllOffers();
+        req.setAttribute("listPack",shopManager.getListPackView());
+        req.setAttribute("listBoost",shopManager.getListBoostView());
+        req.setAttribute("listMap",shopManager.getListSkinMapView());
+        req.setAttribute("listCarton",shopManager.getListSkinCartonView());
 
+
+        this.getServletContext().getRequestDispatcher( "/WEB-INF/ShopView.jsp" ).forward( req, resp );
 
     }
 }
